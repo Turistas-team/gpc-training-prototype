@@ -1,0 +1,79 @@
+/* Ranking del club: podio en cards con cumbres y tabla por nivel */
+.rk-page{background:#F7F4FE;color:#1E1B3A;font-size:16px;line-height:1.5;padding-bottom:40px}
+.rk-page *{box-sizing:border-box}
+.rk-page a{text-decoration:none}
+.rk-page :focus-visible{outline:3px solid #6D28D9;outline-offset:3px}
+.rk-dsp{font-family:Rubik,sans-serif;font-weight:800;letter-spacing:-.025em}
+.rk-mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+.rk-hero{position:relative;overflow:hidden;min-height:300px;padding:40px 16px 96px;background:linear-gradient(180deg,#F7F4FE 0%,#EDE7FB 100%);text-align:center}
+.rk-hero h1{position:relative;z-index:2;margin:0;font-size:clamp(44px,5vw,64px);line-height:1}
+.rk-hero svg{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:max(100%,900px);height:230px;pointer-events:none}
+.rk-tabs{position:relative;z-index:2;display:inline-flex;gap:4px;margin-top:22px;padding:5px;border-radius:99px;background:rgba(255,255,255,.92);border:1px solid #DED6EE;box-shadow:0 8px 22px rgba(30,27,58,.08);max-width:100%;overflow-x:auto}
+.rk-tabs button{display:flex;align-items:center;min-height:44px;padding:0 20px;border:0;border-radius:99px;font:inherit;font-size:15px;font-weight:600;color:#45405F;background:none;cursor:pointer;transition:background .25s ease,color .25s ease;white-space:nowrap}
+.rk-tabs button:hover{color:#1E1B3A}
+.rk-tabs button[aria-selected="true"]{background:#1E1B3A;color:#fff}
+
+.rk-main{position:relative;z-index:3;max-width:1040px;margin:-36px auto 0;padding:0 24px}
+.rk-cycle{margin:0 0 22px;text-align:center;font-size:15px;color:#45405F}
+
+/* podio */
+.rk-pod{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:end}
+.rk-card{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:22px;border-radius:24px;background:linear-gradient(180deg,#F3EEFF 0,#fff 114px);border:1px solid #E2DCF2;box-shadow:0 12px 28px rgba(30,27,58,.05);min-width:0}
+.rk-card.p1{padding-top:30px;background:linear-gradient(180deg,#F1EBFF 0,#fff 150px);border-color:#CBB7F4;box-shadow:0 12px 28px rgba(30,27,58,.10)}
+/* el % es del interior de la card (sin su borde de 1px), por eso se compensan 2px por card */
+.rk-mt{position:absolute;top:-36px;width:calc(300% + 42px);height:140px;pointer-events:none}
+.rk-card.p1 .rk-mt{top:0}
+.rk-card.rk-c0 .rk-mt{left:-1px}
+.rk-card.rk-c1 .rk-mt{left:calc(-100% - 21px)}
+.rk-card.rk-c2 .rk-mt{left:calc(-200% - 41px)}
+.rk-badge{position:absolute;z-index:1;top:16px;left:16px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:18px}
+.rk-card.p1 .rk-badge{background:#F5C451;color:#5A3D00}
+.rk-card.p2 .rk-badge{background:#CFCBDD;color:#33304A}
+.rk-card.p3 .rk-badge{background:#E3A774;color:#5B2E0A}
+.rk-av{position:relative;display:block;flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:center;border:4px solid #fff;box-shadow:0 10px 20px rgba(30,27,58,.12)}
+.rk-card.p1 .rk-av{width:116px;height:116px}
+span.rk-av{display:grid;place-items:center;font-family:Rubik,sans-serif;font-weight:800;font-size:34px}
+.rk-card.p1 span.rk-av{font-size:44px}
+.rk-name{margin-top:14px;font-size:19px;font-weight:700;color:#1E1B3A;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-name:hover{color:#6D28D9;text-decoration:underline}
+.rk-rate{font-size:13px;font-weight:600}
+.rk-lv{margin-top:6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.rk-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;margin-top:18px;padding-top:16px;border-top:1px solid #EEE8F9}
+.rk-stats span{display:flex;flex-direction:column;align-items:center}
+.rk-stats b{font-family:Rubik,sans-serif;font-weight:800;font-size:28px;line-height:1.1}
+.rk-stats small{font-size:12px;color:#625C80}
+
+/* tabla */
+.rk-table{margin-top:22px;padding:10px;background:#fff;border:1px solid #E2DCF2;border-radius:24px;box-shadow:0 12px 30px rgba(30,27,58,.05)}
+.rk-row{display:grid;grid-template-columns:64px minmax(0,1fr) 140px 120px 130px 90px;align-items:center;gap:8px;padding:0 22px;min-height:58px;border-radius:16px}
+.rk-row.me{background:#F1EBFF}
+.rk-row.hd{min-height:40px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#625C80}
+.rk-row .n{font-size:18px;color:#45405F}
+.rk-who{display:flex;align-items:center;gap:12px;min-width:0}
+.rk-who img,.rk-who .ini{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none}
+.rk-who .ini{display:grid;place-items:center;font-weight:700;font-size:14px}
+.rk-who a{font-weight:700;color:#1E1B3A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-who a:hover{color:#6D28D9;text-decoration:underline}
+.rk-who .rk-mono{font-size:12px;font-weight:600}
+.rk-row .lvl{font-size:14px;font-weight:600;color:#45405F}
+.rk-row .r{text-align:right}
+.rk-row .p{font-size:17px}
+.rk-row .d{color:#45405F}
+.rk-row .w{display:flex;justify-content:center}
+.rk-row .w .eq{font-size:18px;font-weight:600;color:#8A85A3}
+.rk-row .w svg{width:20px;height:20px}
+
+@media (max-width:760px){
+  .rk-hero{padding-top:28px;min-height:260px}
+  .rk-main{padding:0 16px;margin-top:-24px}
+  .rk-tabs{gap:2px;padding:4px;scrollbar-width:none}
+  .rk-tabs button{padding:0 12px;font-size:14px}
+  .rk-pod{grid-template-columns:1fr;gap:14px}
+  .rk-card.rk-c1{order:-1}
+  .rk-card .rk-mt,.rk-card.p1 .rk-mt{top:0}
+  .rk-row{grid-template-columns:40px minmax(0,1fr) 56px 40px;padding:0 10px;gap:6px}
+  .rk-row .lvl,.rk-row .d{display:none}
+  .rk-who .rk-mono{display:none}
+}
+@media (prefers-reduced-motion:reduce){.rk-tabs button{transition:none}}

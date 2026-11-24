@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "ladders", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "5317", "--directory", "/home/jjean/gpc-upc-ladders"], "port": 5317 }
+  ]
+}
