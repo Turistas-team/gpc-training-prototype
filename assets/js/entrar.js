@@ -4,11 +4,14 @@
 var EN = { scr: 'login', f: {}, err: '', busy: false, key: null, v: 'idle', test: 0, secs: 300, prob: 0, opened: false, vs: 'idle', sync: 0, t: [], iv: 0 };
 var EN_PROBS = [{ code: '4A', name: '4A Watermelon' }, { code: '1A', name: '1A Theatre Square' }, { code: '71A', name: '71A Way Too Long Words' }, { code: '231A', name: '231A Team' }];
 var EN_DEMO = { mail: 'u20231234@upc.edu.pe', handle: 'Jean_Pool', name: 'Cristian', last: 'Coaguila' };
+// cuenta de prueba del profesor: ve el Panel del grupo y el editor de Contenido
+var EN_PROF = { mail: 'rodo@upc.edu.pe', handle: 'Rodo', name: 'Rodo' };
 
 /* ---------- sesión y cuentas ---------- */
 function enGet(k, d) { try { var v = JSON.parse(localStorage.getItem(k) || 'null'); return v == null ? d : v; } catch (e) { return d; } }
 function enSet(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 function enSession() { return enGet('gpc:sesion', null); }
+function enProf() { var s = enSession(); return !!(s && s.rol === 'profesor'); }
 function enLogout() { enSet('gpc:sesion', null); enReset(); location.hash = '#/entrar'; }
 function enAccounts() { var a = enGet('gpc:cuentas', []); return Array.isArray(a) ? a : []; }
 // la contraseña nunca se guarda tal cual: solo su huella SHA-256
@@ -83,8 +86,8 @@ function enHola() {
   var s = enSession() || {}, u = enCF(s.handle || '') || { h: s.handle || '', r: 0 }, t = enTint(u);
   return '<div class="en-card en-narrow" style="align-items:center;text-align:center" role="status">' +
     '<span class="en-av big" style="background:' + t.color + ';box-shadow:0 0 0 8px ' + t.soft + '" aria-hidden="true">' + enEsc((u.h || '?').charAt(0).toUpperCase()) + '</span>' +
-    '<h1 class="dsp" style="font-size:34px">Hola de nuevo, ' + enEsc(u.h) + '.</h1><p class="en-sub" style="margin:0">Te llevamos a Training.</p>' +
-    '<a class="en-btn dark" href="#/training">Continuar</a></div>';
+    '<h1 class="dsp" style="font-size:34px">Hola de nuevo, ' + enEsc(u.h) + '.</h1><p class="en-sub" style="margin:0">Te llevamos ' + (enProf() ? 'al Panel del grupo' : 'a Training') + '.</p>' +
+    '<a class="en-btn dark" href="' + (enProf() ? '#/panel' : '#/training') + '">Continuar</a></div>';
 }
 function enRegistro() {
   return '<div><h1 class="dsp en-big">Crea tu cuenta</h1><p class="en-sub en-lead">Un momento y empiezas.</p></div>' +
@@ -104,10 +107,10 @@ function enP0() {
   if (EN.v === 'wa') verdict = '<div class="en-vd wa" role="alert">Wrong answer on test 1: "' + enEsc(EN.f.handle) + '" no es un handle de Codeforces. Revisa mayúsculas, guiones y puntos.</div>';
   if (EN.v === 'ok' && u) verdict = '<div class="en-vd ok" role="status">' + EN_IC.ok + 'Accepted: ' + enEsc(u.h) + ' existe en Codeforces.</div><div><button type="button" class="en-btn acc" data-en="verif">Ahora demuestra que es tuyo</button></div>';
   return '<main class="en-sheet" aria-labelledby="en-pt">' +
-    '<h1 id="en-pt" class="dsp" style="text-align:center;font-size:34px">0. Unirse al GPC</h1>' +
+    '<h1 id="en-pt" class="dsp" style="text-align:center;font-size:34px">A. Unirse al GPC</h1>' +
     '<div class="en-st">' +
       '<p>Un estudiante de la UPC se encuentra con un problema que no sabe resolver. Prueba una idea, se equivoca y vuelve a intentarlo. Al compartirlo con otros, descubre un camino que no había considerado. Así comienza su historia en el GPC: con curiosidad, un reto y compañeros con quienes aprender.</p>' +
-      '<p>El GPC tiene un training donde encontrarás una guía para avanzar, problemas para poner en práctica lo aprendido y compañeros con quienes compartir el proceso. Tu recorrido comienza en Beginner y avanza a tu ritmo, para que fortalezcas tus bases y te prepares para nuevos desafíos.</p>' +
+      '<p>En GPC Training encontrarás una guía para avanzar, problemas para poner en práctica lo aprendido y compañeros con quienes compartir el proceso. Tu recorrido comienza en Beginner y avanza a tu ritmo, para que fortalezcas tus bases y te prepares para nuevos desafíos.</p>' +
       '<p>Pero antes de dar el primer paso, el GPC necesita saber quién eres.</p>' +
       '<p>Dado tu nombre y apellido, indica el handle de Codeforces con el que participarás en el grupo.</p>' +
       '<h2 class="en-sec">Entrada</h2><p>Una línea con tu nombre y apellido, proporcionados al crear tu cuenta.</p>' +
@@ -187,7 +190,7 @@ function viewEntrar() {
 function enEnter() {
   document.body.classList.add('en-on');
   if (EN.scr === 'verif' && !EN.iv) enClock();
-  if (EN.scr === 'hola') enLater(function () { if (EN.scr === 'hola' && location.hash === '#/entrar') location.hash = '#/training'; }, 1800);
+  if (EN.scr === 'hola') enLater(function () { if (EN.scr === 'hola' && location.hash === '#/entrar') location.hash = enProf() ? '#/panel' : '#/training'; }, 1800);
 }
 function enClock() {
   clearInterval(EN.iv);
@@ -209,10 +212,13 @@ function enDoLogin() {
   enHash(EN.f.lpass).then(function (h) {
     var acc = enAccounts().filter(function (a) { return a.mail.toLowerCase() === kl || a.handle.toLowerCase() === kl; })[0];
     // la cuenta de prueba (Jean_Pool) entra con cualquier contraseña
-    var demo = kl === EN_DEMO.mail || kl === EN_DEMO.handle.toLowerCase();
+    var demo = kl === EN_DEMO.mail || kl === EN_DEMO.handle.toLowerCase(), prof = kl === EN_PROF.mail || kl === EN_PROF.handle.toLowerCase();
     enLater(function () {
       EN.busy = false;
-      if ((acc && acc.hash === h) || (!acc && demo)) {
+      if (!acc && prof) {
+        enSet('gpc:sesion', { handle: EN_PROF.handle, name: EN_PROF.name, rol: 'profesor', at: Date.now() });
+        EN.f = {}; enGo('hola'); enEnter();
+      } else if ((acc && acc.hash === h) || (!acc && demo)) {
         enSet('gpc:sesion', { handle: acc ? acc.handle : EN_DEMO.handle, name: acc ? acc.name : EN_DEMO.name, at: Date.now() });
         EN.f = {}; enGo('hola'); enEnter();
       } else { EN.err = 'El correo o handle y la contraseña no coinciden. Si eres nuevo, regístrate.'; enRender(); var p = document.getElementById('en-p'); if (p) p.focus(); }
@@ -224,7 +230,7 @@ function enDoRegister() {
   if (!mail || !(f.name || '').trim() || !(f.last || '').trim()) EN.err = 'Completa tu correo, nombre y apellido.';
   else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)) EN.err = 'Ese correo no parece válido.';
   else if ((f.pass || '').length < 8) EN.err = 'La contraseña necesita al menos 8 caracteres.';
-  else if (mail.toLowerCase() === EN_DEMO.mail || enAccounts().some(function (a) { return a.mail.toLowerCase() === mail.toLowerCase(); })) EN.err = 'Ya existe una cuenta con ese correo. Entra con ella.';
+  else if (mail.toLowerCase() === EN_DEMO.mail || mail.toLowerCase() === EN_PROF.mail || enAccounts().some(function (a) { return a.mail.toLowerCase() === mail.toLowerCase(); })) EN.err = 'Ya existe una cuenta con ese correo. Entra con ella.';
   else EN.err = '';
   if (EN.err) return enRender();
   enHash(f.pass).then(function (h) { f.hash = h; delete f.pass; f.mail = mail; f.name = f.name.trim(); f.last = f.last.trim(); EN.v = 'idle'; enGo('p0'); });
