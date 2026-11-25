@@ -1,4 +1,4 @@
-// Datos de ejemplo para los prototipos de GPC Ladders.
+// Datos de ejemplo para los prototipos de GPC Training.
 // Nada de esto es real: handles, problemas y números son inventados.
 (function () {
   // PRNG determinista para que los tres diseños muestren lo mismo
@@ -183,13 +183,13 @@
   var members = memberDefs.map(function (m, i) {
     var r = m[3];
     var base = Math.min(1, (r - 700) / 1500);
+    // estos valores ya no se muestran, pero se siguen calculando para que el resto de datos de prueba no cambie
     var prog = [
       Math.min(100, Math.round(60 + base * 45 + int(-5, 5))),
       Math.min(100, Math.max(0, Math.round(base * 110 - 15 + int(-8, 8)))),
       Math.min(100, Math.max(0, Math.round(base * 90 - 40 + int(-8, 8)))),
       Math.min(100, Math.max(0, Math.round(base * 60 - 30 + int(-5, 5))))
     ];
-    if (m[0] === 'tu_handle') prog = [100, 68, 22, 3];
     var hist = [];
     var v = r - int(250, 450);
     for (var k = 0; k < 24; k++) { v += int(-55, 75); hist.push(v); }
@@ -205,7 +205,6 @@
       solved: m[0] === 'tu_handle' ? 412 : Math.round(80 + base * 900 + int(-40, 40)),
       streak: m[0] === 'tu_handle' ? 12 : int(0, 40),
       weekSolved: int(2, 31),
-      ladder: prog,
       badges: m[0] === 'tu_handle' ? mine.length : Math.round(4 + base * 18 + int(-2, 2)),
       online: rnd() < 0.35,
       lastActive: pick(agos),
@@ -216,10 +215,6 @@
   });
 
   var me = members.filter(function (m) { return m.handle === 'tu_handle'; })[0];
-  me.ladder = levels.map(function (l) {
-    var a = 0, b = 0; topics.forEach(function (t) { if (t.level === l.id) { a += t.solved; b += t.total; } });
-    return Math.round(a / b * 100);
-  });
 
   // Heatmap de 26 semanas para el perfil
   var heat = [];
@@ -227,21 +222,12 @@
   for (var s = 0; s < 12; s++) { heat[25 - Math.floor(s / 7)][6 - (s % 7)] = Math.max(1, heat[25 - Math.floor(s / 7)][6 - (s % 7)]); }
   me.heat = heat;
 
-  var contests = [
-    { name: 'GPC Weekly #34', judge: 'vjudge', when: 'Sáb 21 nov · 10:00', dur: '3 h', kind: 'gpc', note: 'Todos los niveles · Div. Beginner / Junior / Senior' },
-    { name: 'Codeforces Round 1062 (Div. 2)', judge: 'CF', when: 'Dom 22 nov · 09:35', dur: '2 h', kind: 'cf', note: 'Rated para < 2100' },
-    { name: 'AtCoder Beginner Contest 432', judge: 'AtCoder', when: 'Sáb 21 nov · 07:00', dur: '1 h 40', kind: 'atc', note: 'Ideal para Básico e Intermedio' },
-    { name: 'Simulacro ICPC — set Latam 2024', judge: 'vjudge', when: 'Mié 25 nov · 18:00', dur: '5 h', kind: 'gpc', note: 'Solo equipos Senior · una PC por equipo' },
-    { name: 'Educational Round 185', judge: 'CF', when: 'Jue 26 nov · 09:35', dur: '2 h', kind: 'cf', note: 'Hackeos abiertos 12 h — ve por el Caballo de Troya' },
-    { name: 'Training Camp 2027', judge: 'GPC', when: 'Ene 2027', dur: '2 semanas', kind: 'camp', note: 'Con coaches finalistas mundiales' }
-  ];
-
   var daily = { topic: 'Búsqueda binaria', level: 'intermedio', name: 'Escape Plan', judge: 'CF', code: '1873E', rating: 1300, solvedBy: 9 };
 
   window.GPC = {
     levels: levels, topics: topics, problems: problems, achievements: achievements, tierInfo: tierInfo,
     summit: function (lv) { var id = summitOf[lv]; return achievements.filter(function (a) { return a.id === id; })[0]; },
-    members: members, me: me, contests: contests, daily: daily, rankOf: rankOf,
+    members: members, me: me, daily: daily, rankOf: rankOf,
     topicsOf: function (lv) { return topics.filter(function (t) { return t.level === lv; }); },
     level: function (id) { return levels.filter(function (l) { return l.id === id; })[0]; },
     topic: function (id) { return topics.filter(function (t) { return t.id === id; })[0]; },
