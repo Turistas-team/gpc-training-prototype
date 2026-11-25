@@ -107,7 +107,7 @@ function enP0() {
     '<h1 id="en-pt" class="dsp" style="text-align:center;font-size:34px">0. Unirse al GPC</h1>' +
     '<div class="en-st">' +
       '<p>Un estudiante de la UPC se encuentra con un problema que no sabe resolver. Prueba una idea, se equivoca y vuelve a intentarlo. Al compartirlo con otros, descubre un camino que no había considerado. Así comienza su historia en el GPC: con curiosidad, un reto y compañeros con quienes aprender.</p>' +
-      '<p>El GPC tiene un ladder donde encontrarás una guía para avanzar, problemas para poner en práctica lo aprendido y compañeros con quienes compartir el proceso. Tu recorrido comienza en Beginner y avanza a tu ritmo, para que fortalezcas tus bases y te prepares para nuevos desafíos.</p>' +
+      '<p>El GPC tiene un training donde encontrarás una guía para avanzar, problemas para poner en práctica lo aprendido y compañeros con quienes compartir el proceso. Tu recorrido comienza en Beginner y avanza a tu ritmo, para que fortalezcas tus bases y te prepares para nuevos desafíos.</p>' +
       '<p>Pero antes de dar el primer paso, el GPC necesita saber quién eres.</p>' +
       '<p>Dado tu nombre y apellido, indica el handle de Codeforces con el que participarás en el grupo.</p>' +
       '<h2 class="en-sec">Entrada</h2><p>Una línea con tu nombre y apellido, proporcionados al crear tu cuenta.</p>' +
@@ -162,7 +162,7 @@ function enListo() {
   return '<div class="en-card en-welcome" role="status">' +
     '<span class="en-av big" style="background:' + t.color + ';box-shadow:0 0 0 8px ' + t.soft + '" aria-hidden="true">' + enEsc(u.h.charAt(0).toUpperCase()) + '</span>' +
     '<h1 class="dsp" style="font-size:40px;line-height:1.05">Bienvenido al GPC, ' + enEsc(EN.f.name || u.h) + '</h1>' +
-    '<p class="en-sub" style="margin:0;max-width:460px;font-size:17px">Avanzas a tu ritmo. Tus estadísticas de Codeforces ya se cuentan en el ladder.</p>' +
+    '<p class="en-sub" style="margin:0;max-width:460px;font-size:17px">Avanzas a tu ritmo. Tus estadísticas de Codeforces ya se cuentan en el training.</p>' +
     '<button type="button" class="en-btn dark" data-en="finish">Continuar</button></div>';
 }
 function enBody() {
@@ -181,7 +181,7 @@ function viewEntrar() {
     '<svg class="en-mtn" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><circle cx="1080" cy="300" r="150" fill="#FFD9A8" opacity=".45"/><circle cx="1080" cy="300" r="70" fill="#F7931E" opacity=".9"/>' +
     '<path d="M0 460 L0 300 L150 250 L280 290 L430 180 L540 240 L640 160 L760 230 L880 180 L1010 250 L1150 200 L1290 260 L1440 220 L1440 460Z" fill="#E2D9FA"/>' +
     '<path d="M0 460 L0 370 L170 330 L320 360 L470 300 L620 350 L780 310 L940 360 L1100 320 L1260 350 L1440 330 L1440 460Z" fill="#D3C6F6"/></svg>' +
-    '<div class="en-wrap"><div class="en-top"><div class="en-brand"><img src="assets/img/logo-gpc-upc.png" alt="Logo del GPC UPC"><span class="dsp">GPC Ladders</span></div><div class="en-stepsbox">' + enSteps() + '</div></div>' +
+    '<div class="en-wrap"><div class="en-top"><div class="en-brand"><img src="assets/img/logo-gpc-upc.png" alt="Logo del GPC UPC"><span class="dsp">GPC Training</span></div><div class="en-stepsbox">' + enSteps() + '</div></div>' +
     '<div class="en-body">' + enBody() + '</div></div></div>';
 }
 function enEnter() {
