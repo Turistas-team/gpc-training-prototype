@@ -56,3 +56,9 @@
 - El sistema debe clasificar a los usuario por orden según la cantidad de problemas y días activos durante un rango de inicio y final (ciclos de universidad).
 - El sistema debe comparar el cambio de la posición del miembro con la anterior semana.
 - El sistema debe clasificar de manera generar y por nivel.
+
+#### Logros
+
+- El sistema debe permitir la asignación de logros de manera manual.
+- El sistema debe conectar con Codeforces para la verificación de logros específicos.
+- El sistema debe clasificar los logros en obtenidos y pendientes.
