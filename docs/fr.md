@@ -50,3 +50,9 @@
 - El sistema debe calcular el maximo de performance de las soluciones según la categoría
 - El sistema debe categorizar el performance según la categoría (Todos, rápida, normal y div. 2)
 - El sistema debe guardar la fecha, formato, nivel, cantidad de problemas resueltos, tiempo y performance de cada solución
+
+#### Ranking
+
+- El sistema debe clasificar a los usuario por orden según la cantidad de problemas y días activos durante un rango de inicio y final (ciclos de universidad).
+- El sistema debe comparar el cambio de la posición del miembro con la anterior semana.
+- El sistema debe clasificar de manera generar y por nivel.
