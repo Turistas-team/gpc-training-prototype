@@ -74,7 +74,7 @@ function enIn(id, label, k, attrs, extra) {
 }
 function enLogin() {
   return '<form class="en-card en-narrow" data-en-form="login" novalidate aria-labelledby="en-t">' +
-    '<div style="text-align:center"><h1 class="dsp" id="en-t">Inicia sesión</h1><p class="en-sub">Con tu correo o tu handle de Codeforces.</p></div>' +
+    '<div style="text-align:center"><h1 class="dsp" id="en-t">Inicia sesión</h1></div>' +
     enIn('en-u', 'Correo o handle', 'user', 'autocomplete="username" spellcheck="false" autocapitalize="off" placeholder="u20231234@upc.edu.pe"') +
     enIn('en-p', 'Contraseña', 'lpass', 'type="password" autocomplete="current-password"', '<a href="#/entrar" class="en-forgot" data-en="forgot">¿Olvidaste tu contraseña?</a>') +
     enMsg() +
