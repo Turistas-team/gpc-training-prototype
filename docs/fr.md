@@ -68,7 +68,25 @@
 - RF42: El sistema debe almacenar los problemas resueltos en el ciclo, los días activos, la racha actual de días y el mejor performance con modo y fecha.
 - RF24 - RF26
 - RF43: El sistema debe filtrar las últimas 4 simulaciones con fecha, formato, cantidad de problemas resueltos y performance.
+- RF44: El sistema debe obtener el rating actual, nivel, cantidad de problemas resueltos en total, cantidad de problemas resueltos en el año, cantidad de contests en las que se participaron y mejor puesto en un contest. Todos los datos de codeforces
+- RF45: El sistema debe obtener el rating máximo junto a la fecha, de Codeforces.
+- RF46: El sistema debe obtener los datos históricos de los contests (fecha) y cambio de rating, de Codeforces.
+- RF47: El sistema debe obtener la cantidad máxima y mínima de problemas resueltos en el último año, de Codeforces.
+- RF48: El sistema debe obtener la cantidad de problemas resueltos por día en el último año, de Codeforces.
+- RF49: El sistema debe obtener la cantidad de problemas resuletos en el último mes, la racha máxima de días, la racha máxima del año y la racha máxima del mes, de Codeforces.
+- RF50: El sistema debe obtener el mayor rating de los problemas resueltos por día durante el último año, de Codeforces.
+- RF51: El sistema debe obtener el rating de todos los problemas resueltos que pertecen a un contest de codeforces.
+- RF52: El sistema debe obtener la letra de los problemas resueltos de un contest de Codeforces.
+- RF53: El sistema debe calcular el promedio de rating para todos los problemas resueltos con rating de codeforces.
+- RF54: El sistema debe obtener el máximo y mínimo delta del rating provocado por un contest con fecha, de Codeforces.
+- RF55: El sistema debe obtener la fecha del primer AC en codeforces.
+- RF56: El sistema debe obtener la cantidad de problemas resueltos por tema, de Codeforces.
+- RF57: El sistema debe obtener cantidad de envíos por estado, de Codeforces.
+- RF58: El sistema debe guardar el registro de los últimos 8 contests, con fecha, nombre del contest (con link), puesto, diferencia de rating y rating final, de Codeforces.
+- RF59: El sistema debe obtener el rating máximo, problemas resueltos, envíos (con estados), problema más dífícil, rating promedio, contests normales y contests virtuales de la semana, de Codeforces.
+- RF60: El sistema debe guardar los problemas con envíos y sin AC, de Codeforces (con número, letra y link).
+- RF61: El sistema debe guardar el puesto en el nivel del gpc, puesto general y fecha de entrada al grupo de estudio.
 
 #### General
 
-- RFXX: El sistema debe asignar rangos de rating a nivel de Codeforces
+- RF62: El sistema debe asignar rangos de rating a nivel de Codeforces
