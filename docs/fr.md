@@ -62,3 +62,13 @@
 - RF39: El sistema debe permitir la asignación de logros de manera manual.
 - RF40: El sistema debe conectar con Codeforces para la verificación de logros específicos.
 - RF41: El sistema debe clasificar los logros en obtenidos y pendientes.
+
+#### Perfil
+
+- RF42: El sistema debe almacenar los problemas resueltos en el ciclo, los días activos, la racha actual de días y el mejor performance con modo y fecha.
+- RF24 - RF26
+- RF43: El sistema debe filtrar las últimas 4 simulaciones con fecha, formato, cantidad de problemas resueltos y performance.
+
+#### General
+
+- RFXX: El sistema debe asignar rangos de rating a nivel de Codeforces
